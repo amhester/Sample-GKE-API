@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: default
+  name: api
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      name: api
+      labels:
+        name: api
+    spec:
+      containers:
+      - image: gcr.io/endpoints-release/endpoints-runtime:1.5
+        name: esp
+        args: [
+          "-p", "8080",
+          "-a", "127.0.0.1:8085",
+          "-s", "api.endpoints.{your-google-project}.cloud.goog",
+          "-v", "{your-endpoints-deployment-id}",
+        ]
+        resources:
+          requests:
+            cpu: 20m
+          limits:
+            cpu: 40m
+            memory: 64Mi
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+        - mountPath: /etc/nginx/custom
+          name: nginx-config
+          readOnly: true
+      - image: gcr.io/{your-google-project}/api:latest
+        name: api
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8085
+        env: # Any environment variables you need here
+        resources:
+          requests:
+            cpu: 10m
+          limits:
+            cpu: 30m
+            memory: 128Mi
+        ports:
+        - containerPort: 8085
+          name: http
