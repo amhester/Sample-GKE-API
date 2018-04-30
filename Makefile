@@ -1,10 +1,10 @@
 .PHONY: run build build-alpine build-docker push-gcr deploy
 
 run:
-	go build -o ./api && ./api
+	go build -o ./bin/api && ./bin/api
 
 build:
-	go build -o ./api
+	go build -o ./bin/api
 
 build-alpine:
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ./api

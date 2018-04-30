@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: default
+  name: sample-gke-api
+  labels:
+    apiVersion: v1
+    app: sample-gke-api
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "sample-gke-api-ingress"
+    kubernetes.io/tls-acme: "false"
+spec:
+  tls:
+  - hosts:
+    - <your-host-here>
+    secretName: sample-tls
+  rules:
+  - host: <your-host-here>
+    http:
+      paths:
+        - path: /*
+          backend:
+            serviceName: api-v1
+            servicePort: 80

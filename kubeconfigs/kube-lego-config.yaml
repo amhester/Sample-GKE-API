@@ -1,0 +1,12 @@
+apiVersion: v1
+metadata:
+  name: kube-lego
+  namespace: default
+data:
+  # modify this to specify your address
+  lego.email: "<your.email@something.com>"
+  # configure letsencrypt's staging api
+  lego.url: "https://acme-staging.api.letsencrypt.org/directory"
+  # configure letsencrypt's production api
+  # lego.url: "https://acme-v01.api.letsencrypt.org/directory"
+kind: ConfigMap
