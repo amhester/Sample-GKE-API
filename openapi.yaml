@@ -1,0 +1,63 @@
+######################################
+### SAMPLE API SPEC
+### Version: v1.0.0
+### Type: google endpoints
+### Project: <your-project-id>
+######################################
+swagger: '2.0'
+info:
+  title: Sample GKE API
+  description: Sample project for setting up an api on GKE with Endpoints and Let's Encrypt
+  version: v1.0.0
+
+# Host info
+host: "dev.api-v1.endpoints.charlotte-161616.cloud.goog"
+schemes:
+  - http
+  - https
+
+# Content Types
+produces:
+  - application/json
+
+consumes:
+  - application/json
+
+# Catch All
+# Add with all value to allow all traffic to hit api, even if route is not specified.
+# If not added, only traffic to routes listed here will be allowed through.
+x-google-allow: all
+
+######################################
+### PATHS
+######################################
+
+paths:
+
+######################################
+### GENERAL
+######################################
+
+  /:
+    get:
+      summary: Health Check
+      operationId: healthCheck
+      description: Returns a 200 ok.
+      responses:
+        200:
+          description: Returns a 200 ok.
+
+  /hello:
+    get:
+      summary: Hello World
+      operationId: sayHello
+      description: Will return a greeting to supplied name, or world.
+      parameters:
+        - name: name
+          in: query
+          description: The name for which to return a greeting.
+          required: false
+          type: string
+      responses:
+        200:
+          description: Returns a 200 ok.
