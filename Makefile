@@ -1,4 +1,20 @@
+SHELL := /bin/bash
+
 .PHONY: run build build-alpine build-docker push-gcr deploy
+
+create-project:
+	gcloud projects create sample-gke-api --name="Sample GKE API"
+	gcloud config set project sample-gke-api
+	gcloud auth application-default login
+	gcloud services enable endpoints.googleapis.com
+
+create-cluster:
+	gcloud container clusters create sample-gke-api-cluster --zone us-central1-a --machine-type g1-small --num-nodes 1
+	gcloud config set container/cluster sample-gke-api-cluster
+	gcloud container clusters get-credentials sample-gke-api-cluster
+
+deploy-api-spec:
+	./deploy-api-spec.sh
 
 run:
 	go build -o ./bin/api && ./bin/api

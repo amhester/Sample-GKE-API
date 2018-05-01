@@ -22,7 +22,7 @@ spec:
           "-p", "8080",
           "-a", "127.0.0.1:8085",
           "-s", "api.endpoints.{your-google-project}.cloud.goog",
-          "-v", "{your-endpoints-deployment-id}",
+          "-v", "{OPENAPI_ID}",
         ]
         resources:
           requests:

@@ -1,0 +1,1 @@
+sed -i '' -E 's/(\{OPENAPI_ID\}|[0-9]{4}-[0-9]{1,2}-[0-9a-z]{4})/'$(gcloud endpoints services deploy ./openapi.yaml 2>&1 | grep '^Service Configuration' | tr ' ' '\n' | egrep '\[[0-9]{4}-[0-9]{1,2}-[0-9a-z]{4}\]' | sed -E 's/(\[|\])//g')'/' ./kubeconfigs/api-deployment.yaml

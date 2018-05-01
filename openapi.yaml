@@ -11,7 +11,7 @@ info:
   version: v1.0.0
 
 # Host info
-host: "dev.api-v1.endpoints.charlotte-161616.cloud.goog"
+host: "api.endpoints.exampleapigke.cloud.goog"
 schemes:
   - http
   - https
