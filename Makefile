@@ -4,6 +4,9 @@ SHELL := /bin/bash
 
 all: create-project create-cluster deploy-api-spec build-alpine build-docker push-gcr deploy
 
+auth:
+	gcloud auth application-default login
+
 create-project:
 	gcloud projects create sample-gke-api --name="Sample GKE API"
 	gcloud config set project sample-gke-api
