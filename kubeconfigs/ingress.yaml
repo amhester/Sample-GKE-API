@@ -7,7 +7,6 @@ metadata:
     apiVersion: v1
     app: sample-gke-api
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "sample-gke-api-ingress"
     kubernetes.io/tls-acme: "false"
 spec:
   tls:
