@@ -4,7 +4,7 @@ metadata:
   namespace: default
   name: api
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     rollingUpdate:
       maxUnavailable: 0
@@ -36,7 +36,7 @@ spec:
         - mountPath: /etc/nginx/custom
           name: nginx-config
           readOnly: true
-      - image: gcr.io/{your-google-project}/api:latest
+      - image: gcr.io/sample-gke-api/api:latest
         name: api
         imagePullPolicy: Always
         livenessProbe:
