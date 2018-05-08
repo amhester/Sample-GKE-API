@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   namespace: default
@@ -43,12 +43,12 @@ spec:
           httpGet:
             path: /
             port: 8085
-        env: # Any environment variables you need here
         resources:
           requests:
             cpu: 10m
+            memory: 32Mi
           limits:
-            cpu: 30m
+            cpu: 40m
             memory: 128Mi
         ports:
         - containerPort: 8085
